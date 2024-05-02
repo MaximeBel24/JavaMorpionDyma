@@ -1,5 +1,7 @@
 package com.dyma.game;
 
+import com.dyma.exceptions.TicTacToeInvalidInputException;
+
 import java.util.Arrays;
 
 import static com.dyma.game.StringConstants.LINE_SEPARATOR;
@@ -13,7 +15,7 @@ public class TicTacToe {
             {'.', '.', '.'}
     };
 
-    public void processInput(Player player, int inputUser) {
+    public void processInput(Player player, int inputUser) throws TicTacToeInvalidInputException {
         var row = (inputUser -1) / 3;
         var column = (inputUser - 1) % 3;
         if (grid[row][column] == '.') {
@@ -22,6 +24,8 @@ public class TicTacToe {
             } else {
                 grid[row][column] = 'O';
             }
+        } else {
+            throw new TicTacToeInvalidInputException("La case est déjà occupée, veuillez en saisir une autre.");
         }
     }
 
